@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<AzureCosmosDisableNewtonsoftJsonCheck>true</AzureCosmosDisableNewtonsoftJsonCheck>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Vpns.Cqrs\Vpns.Cqrs.Domain\Vpns.Cqrs.Domain.csproj" />
+    <ProjectReference Include="..\..\Vpns.Cqrs\Vpns.Cqrs.Infrastructure\Vpns.Cqrs.Infrastructure.csproj" />
+  </ItemGroup>
+
+</Project>
