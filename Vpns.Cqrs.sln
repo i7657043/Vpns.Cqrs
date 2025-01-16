@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vpns.Cqrs.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vpns.Cqrs.Domain", "Vpns.Cqrs.Domain\Vpns.Cqrs.Domain.csproj", "{782EA222-5830-473E-8233-1C883C37EBF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Runner", "Vpns.Cqrs.Runner\Runner.csproj", "{F5D2A8E9-62D5-47C7-9FDB-9CCF2DBFA311}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1E047113-50B7-4F0C-A930-3ECD20174171}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +23,10 @@ Global
 		{782EA222-5830-473E-8233-1C883C37EBF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{782EA222-5830-473E-8233-1C883C37EBF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{782EA222-5830-473E-8233-1C883C37EBF3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5D2A8E9-62D5-47C7-9FDB-9CCF2DBFA311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5D2A8E9-62D5-47C7-9FDB-9CCF2DBFA311}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5D2A8E9-62D5-47C7-9FDB-9CCF2DBFA311}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5D2A8E9-62D5-47C7-9FDB-9CCF2DBFA311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E047113-50B7-4F0C-A930-3ECD20174171}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E047113-50B7-4F0C-A930-3ECD20174171}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E047113-50B7-4F0C-A930-3ECD20174171}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E047113-50B7-4F0C-A930-3ECD20174171}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

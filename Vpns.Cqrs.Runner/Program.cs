@@ -1,6 +1,7 @@
 ﻿using Vpns.Cqrs.Domain.Models.Aggregates;
 using Vpns.Cqrs.Infrastructure.Database;
 using Vpns.Cqrs.Infrastructure.Database.Abstractions;
+using Vpns.Cqrs.Infrastructure.Database.Fakes;
 
 internal class Program
 {
@@ -22,16 +23,12 @@ internal class Program
         aggregateRepo.Persist(vpnFreshCopyFromRepo);
         //
 
-        //CreateVpn Handler
+        //UpdateLocation Handler
         Vpn vpnFreshCopyFromRepo2 = aggregateRepo.Rehydrate<Vpn>(vpn.AggregateId);
 
         vpnFreshCopyFromRepo2.UpdateLocation(vpn.AggregateId, "usa");
 
-        aggregateRepo.Persist(vpn);
+        aggregateRepo.Persist(vpnFreshCopyFromRepo2);
         //
-
-        //create agg_repo
-        //method 1 WRITE - persist the event in the eventstoreservice (should be in handler e.g. CreateAccountHandler) after apply
-        //method 1 READ - read from eventstoreservice, call the baseAgg Create method that applies all the events we just got
     }
 }

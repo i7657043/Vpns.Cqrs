@@ -36,7 +36,7 @@ namespace Vpns.Cqrs.Domain.Models.Aggregates
             switch (@event)
             {
                 case VpnCreatedEvent e:
-                    //AggregateId = @event.AggregateId;
+                    AggregateId = @event.AggregateId;
                     Title = e.Title;
                     Location = e.Title;
                     break;

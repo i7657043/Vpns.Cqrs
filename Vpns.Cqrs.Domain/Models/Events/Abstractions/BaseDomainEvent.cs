@@ -8,10 +8,10 @@ namespace Vpns.Cqrs.Domain.Models.Events.Abstractions
         protected BaseDomainEvent(Guid id, long version)
         {
             AggregateId = id;
-            AggregateVersion = version;
+            Version = version;
         }
 
-        public long AggregateVersion { get; }
+        public long Version { get; }
         public Guid AggregateId { get; }
     }
 }

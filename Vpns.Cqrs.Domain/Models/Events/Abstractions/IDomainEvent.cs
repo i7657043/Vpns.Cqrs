@@ -2,7 +2,7 @@
 {
     public interface IDomainEvent
     {
-        long AggregateVersion { get; }
+        long Version { get; }
         Guid AggregateId { get; }
     }
 }

@@ -4,7 +4,7 @@ namespace Vpns.Cqrs.Infrastructure.Database.Abstractions
 {
     public interface IEventStore
     {
-        void Create(IDomainEvent @event);
+        void AddEvents(IEnumerable<IDomainEvent> events);
         IEnumerable<IDomainEvent> GetEvents(Guid aggregateId);
     }
 }

@@ -14,14 +14,14 @@ namespace Vpns.Cqrs.Domain.Models.Aggregates.Abstractions
         public BaseAggregate() { }
         protected BaseAggregate(Guid aggregateId) => AggregateId = aggregateId;
 
-        public static T Create<T>() where T : BaseAggregate
+        public static T Create<T>(IEnumerable<IDomainEvent> events) where T : BaseAggregate
         {
             T responseObj = (T)Activator.CreateInstance(typeof(T))!;
 
-            //We are going to replay the events onto the responseObj here (Aggregare.Apply)
-            //then clear the events and return the object
-            //This gets called from the agg_repo when rehydrating an aggregate, which is used in the command handler methods like updateTitle
+            foreach (IDomainEvent @event in events)
+                responseObj.Apply(@event);
 
+            responseObj.ClearEvents();
 
             return responseObj;
         }
