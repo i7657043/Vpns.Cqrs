@@ -5,13 +5,13 @@ namespace Vpns.Cqrs.Domain.Models.Events.Abstractions
     public abstract record BaseDomainEvent<T> : IDomainEvent
         where T : BaseAggregate
     {
-        protected BaseDomainEvent(Guid id, long version)
+        protected BaseDomainEvent(long version)
         {
-            AggregateId = id;
+            EventId = Guid.NewGuid();
             Version = version;
         }
-
+        
+        public Guid EventId { get; }
         public long Version { get; }
-        public Guid AggregateId { get; }
     }
 }

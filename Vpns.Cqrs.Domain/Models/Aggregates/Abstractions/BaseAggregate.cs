@@ -12,18 +12,19 @@ namespace Vpns.Cqrs.Domain.Models.Aggregates.Abstractions
         public long Version { get; private set; } = 1;
 
         public BaseAggregate() { }
+
         protected BaseAggregate(Guid aggregateId) => AggregateId = aggregateId;
 
         public static T Create<T>(IEnumerable<IDomainEvent> events) where T : BaseAggregate
         {
-            T responseObj = (T)Activator.CreateInstance(typeof(T))!;
+            T aggregate = (T)Activator.CreateInstance(typeof(T))!;
 
             foreach (IDomainEvent @event in events)
-                responseObj.Apply(@event);
+                aggregate.Apply(@event);
 
-            responseObj.ClearEvents();
+            aggregate.ClearEvents();
 
-            return responseObj;
+            return aggregate;
         }
 
         public void Apply(IDomainEvent @event)

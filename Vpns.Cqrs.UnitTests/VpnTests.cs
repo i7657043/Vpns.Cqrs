@@ -11,14 +11,17 @@ namespace UnitTests
     public class VpnTests
     {
         [Test]
-        public void Vpn_Can_Be_Created_And_Updated()
+        public async Task Vpn_Can_Be_Created_And_Updated()
         {
+            //Arrange
             IAggregateRepository aggregateRepo = new AggregateRepository(new EventStore());
+
+            //Act
 
             //CreateVpn Handler
             Vpn vpn = new Vpn().Create(Guid.NewGuid(), "vpn One", "uk");
 
-            aggregateRepo.Persist(vpn);
+            await aggregateRepo.PersistAsync(vpn);
             //
 
             //UpdateTitle Handler
@@ -26,7 +29,7 @@ namespace UnitTests
 
             vpnFreshCopyFromRepo.UpdateTitle(vpnFreshCopyFromRepo.AggregateId, "another title");
 
-            aggregateRepo.Persist(vpnFreshCopyFromRepo);
+            await aggregateRepo.PersistAsync(vpnFreshCopyFromRepo);
             //
 
             //UpdateLocation Handler
@@ -34,38 +37,42 @@ namespace UnitTests
 
             vpnFreshCopyFromRepo2.UpdateLocation(vpn.AggregateId, "usa");
 
-            aggregateRepo.Persist(vpnFreshCopyFromRepo2);
+            await aggregateRepo.PersistAsync(vpnFreshCopyFromRepo2);
             //
 
+            //Assert
             vpnFreshCopyFromRepo2.Title.Should().Be("another title");
             vpnFreshCopyFromRepo2.Location.Should().Be("usa");
         }
 
         [Test]
-        public void Vpn_Can_Be_Created_But_Not_Updated_Due_To_Event_Version_Mismatch()
+        public async Task Concurrent_Vpn_Update_Causes_Event_Version_Mismatch_And_Throws_Exception()
         {
+            //Arrange
             Guid aggregateId = Guid.NewGuid();
             EventStore eventStore = new EventStore();
-            eventStore.AddEvents(new List<IDomainEvent>()
+            await eventStore.AddEventsAsync(aggregateId, new List<IDomainEvent>()
             {
                 new VpnCreatedEvent(aggregateId, 1, "vpnOne", "uk"),
                 new VpnTitleUpdatedEvent(aggregateId, 2, "another title")
             });
 
             IAggregateRepository aggregateRepo = new AggregateRepository(eventStore);
-
+            
             Vpn vpn = aggregateRepo.Rehydrate<Vpn>(aggregateId);
 
-            Vpn vpnConcurrencyIssue = aggregateRepo.Rehydrate<Vpn>(aggregateId);
+            //Simulate another event being added since rehydration of aggregate
+            await eventStore.AddEventsAsync(aggregateId, new List<IDomainEvent>()
+            {
+                new VpnLocationUpdatedEvent(aggregateId, 3, "usa")
+            });
 
-            vpn.UpdateTitle(vpn.AggregateId, "another title");
+            //Act
+            vpn.UpdateTitle(vpn.AggregateId, "another title again");
 
-            vpnConcurrencyIssue.UpdateTitle(vpnConcurrencyIssue.AggregateId, "another title added late");
-
-            aggregateRepo.Persist(vpn);
-
-            Assert.Throws<ArgumentOutOfRangeException>(() => {
-                aggregateRepo.Persist(vpnConcurrencyIssue);
+            //Assert
+            Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => {
+                await aggregateRepo.PersistAsync(vpn);
             });
         }
     }

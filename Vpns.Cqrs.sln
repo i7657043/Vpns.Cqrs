@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vpns.Cqrs.Infrastructure", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vpns.Cqrs.Domain", "Vpns.Cqrs.Domain\Vpns.Cqrs.Domain.csproj", "{782EA222-5830-473E-8233-1C883C37EBF3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{1E047113-50B7-4F0C-A930-3ECD20174171}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vpns.Cqrs.UnitTests", "Vpns.Cqrs.UnitTests\Vpns.Cqrs.UnitTests.csproj", "{1E047113-50B7-4F0C-A930-3ECD20174171}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vpns.Cqrs.CosmosClient", "Vpns.Cqrs.CosmosClient\Vpns.Cqrs.CosmosClient.csproj", "{B8DEC1B9-927C-4991-8FB1-2FC20B0FE0D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{1E047113-50B7-4F0C-A930-3ECD20174171}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1E047113-50B7-4F0C-A930-3ECD20174171}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1E047113-50B7-4F0C-A930-3ECD20174171}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8DEC1B9-927C-4991-8FB1-2FC20B0FE0D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8DEC1B9-927C-4991-8FB1-2FC20B0FE0D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8DEC1B9-927C-4991-8FB1-2FC20B0FE0D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8DEC1B9-927C-4991-8FB1-2FC20B0FE0D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -11,32 +11,24 @@ namespace Vpns.Cqrs.Domain.Models.Aggregates
 
         public Vpn() { }
 
-        public Vpn(Guid aggregateId, string title, string location) : base(aggregateId)
-        {
+        public Vpn(Guid aggregateId, string title, string location) : base(aggregateId) =>
             Apply(new VpnCreatedEvent(AggregateId, Version, title, location));
-        }
 
-        public Vpn Create(Guid vpnId, string title, string location)
-        {
-            return new Vpn(vpnId, title, location);
-        }
+        public Vpn Create(Guid vpnId, string title, string location) => 
+            new Vpn(vpnId, title, location);
 
-        public void UpdateTitle(Guid vpnId, string title)
-        {
+        public void UpdateTitle(Guid vpnId, string title) =>
             Apply(new VpnTitleUpdatedEvent(AggregateId, Version, title));
-        }
 
-        public void UpdateLocation(Guid vpnId, string location)
-        {
+        public void UpdateLocation(Guid vpnId, string location) =>
             Apply(new VpnLocationUpdatedEvent(AggregateId, Version, location));
-        }
 
         protected override void When(IDomainEvent @event)
         {
             switch (@event)
             {
                 case VpnCreatedEvent e:
-                    AggregateId = @event.AggregateId;
+                    AggregateId = e.VpnId;
                     Title = e.Title;
                     Location = e.Title;
                     break;

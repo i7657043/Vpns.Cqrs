@@ -13,11 +13,7 @@ namespace Vpns.Cqrs.Infrastructure.Database
         {
             _eventStore = eventStore;
         }
-
-        //To test this we need to mock the event store with 2 events
-        //Then mock a new aggregate using the create method on it and passing in some mocked events but with the same versions
-        //Then call this method with the mocked aggregate and the mocked event store
-        public void Persist<T>(T aggregate) where T : BaseAggregate
+        public async Task PersistAsync<T>(T aggregate) where T : BaseAggregate
         {
             //If theres any events already in the event store with the same or a higher version number than we are trying to write, throw an exception
             long expectedVersion = aggregate.Events.First().Version;
@@ -28,7 +24,7 @@ namespace Vpns.Cqrs.Infrastructure.Database
 
             List<IDomainEvent> newEvents = aggregate.Events.ToList();
             
-            _eventStore.AddEvents(newEvents);
+            await _eventStore.AddEventsAsync(aggregate.AggregateId, newEvents);
 
             aggregate.ClearEvents();
         }
